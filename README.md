@@ -19,9 +19,10 @@ No final o email será eliminado.
 
 Os emails que serão pesquisados serão os que contenham o assunto "Enrollment Successful - Your SSL certificate is ready" com o remetente "support@cert-manager.com"
 
-
 As configurações do ficheiro instala-certificado-https.sh apenas incluem a localização dos ficheiros vhost para os Apache, para a configuração da localização dos novos certificados ser alterada se se mantiver a standard que inclui o snakeoil, apenas servirá para a primeira instalação do certificado.
 Este script inclui uma rotina de sincronização particular para servidores onde existe a replicação de configurações.
+
+As ligações são sempre feitas com base no hostname definido no ficheiro do certificado descarregado, refazendo o nome substituindo os _ por . com queries ao DNS e ligações por ssh com o user root. Ainda não existe implementação para casos em que a instalação deva ser feita com um utilizador que faça posteriormente sudo.
 
 O script certificados.sh poderá ser adicionado no cron de forma a ser executado automaticamente após validação da execução.
 
