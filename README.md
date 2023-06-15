@@ -3,8 +3,11 @@ Instalador automatizado de certificados web (para Linux cliente e servidor)
 
 
 1 - Definir um servidor ao qual é possível aceder por SSH para testar a ligação no ficheiro certificados.sh na variável server 
+
 2 - Definir a localização dos scripts na variável scriptsdir que deverá ser definida também no ficheiro downloads-instala-certificados-https.sh
+
 3 - Definir a localização dos downloads no ficheiro downloads-instala-certificados-https.sh
+
 4 - Definir as credenciais de acesso ao e-mail no ficheiro HOME/.private/mailcredentials (se o PC for partilhado verificar as permissões do ficheiro, a cifra das credenciais ainda está por ser implementada) que deverá conter por linha o seguinte:
 
 hostname
