@@ -4,7 +4,6 @@
 #mferraz@uporto.pt
 
 # config
-#cabundle=/home/mferraz/scripts/certificados/ca-bundle.txt
 avhost_path="/etc/apache2/sites-available/" # localização da configuração dos vhosts apache
 
 # script
