@@ -20,5 +20,7 @@ Os emails que serão pesquisados serão os que contenham o assunto "Enrollment S
 As configurações do ficheiro instala-certificado-https.sh apenas incluem a localização dos ficheiros vhost para os Apache, para a configuração da localização dos novos certificados ser alterada se se mantiver a standard que inclui o snakeoil, apenas servirá para a primeira instalação do certificado.
 Este script inclui uma rotina de sincronização particular para servidores onde existe a replicação de configurações.
 
+O script certificados.sh poderá ser adicionado no cron de forma a ser executado automaticamente após validação da execução.
+
 
 
