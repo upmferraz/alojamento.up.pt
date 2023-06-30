@@ -5,7 +5,6 @@
 
 # config
 avhost_path="/etc/apache2/sites-available/" # localização da configuração dos vhosts apache
-
 # script
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -17,9 +16,7 @@ if [[ $1 == "" ]]; then
 	exit 0
 fi
 
-
-#host=`echo ${1##*/} | sed s/_cert.cer//g | sed s/_/./g`
-host=`echo ${1##*/} | sed s/.pem//g | sed s/_/./g`
+host=$(echo ${1##*/} | sed s/.pem//g | sed s/_/./g)
 csr="$host.pem"
 key="/etc/ssl/private/$host.key"
 
@@ -30,7 +27,7 @@ mv $1 $host.pem
 if [[ $2 == "" ]]; then
 	hostsrv=$host
 	# verifica no DNS se é um servidor em www.up.pt
-	hostsrvdns=`host $host | grep "has address" | cut -f 4 -d " " | uniq`
+	hostsrvdns=$(host $host | grep "has address" | cut -f 4 -d " " | uniq)
 	if [[ $hostsrvdns == "193.137.55.13" ]]; then
 		hostsrv="www1.up.pt"
 	fi
@@ -38,8 +35,10 @@ else
 	hostsrv=$2
 fi
 
+sshcmd="ssh root@$hostsrv"
+
 # verifica qual o servidor web (apenas para nginx ou apache)
-websrvchk=`ssh root@$hostsrv netstat -putan | grep :443 | grep apache | grep -v 127.0.0.1 | head -1`
+websrvchk=$($sshcmd netstat -putan | grep :443 | grep apache | grep -v 127.0.0.1 | head -1)
 if [[ $websrvchk == "" ]]; then
 	webserver="nginx"
 else
@@ -47,8 +46,8 @@ else
 fi
 
 	# validar certificado com a chave
-	valcsr=`openssl x509 -noout -modulus -in $csr | openssl md5 | cut -f 2 -d " "`
-	valkey=`ssh root@$hostsrv openssl rsa -noout -modulus -in $key | openssl md5 | cut -f 2 -d " "`
+	valcsr=$(openssl x509 -noout -modulus -in $csr | openssl md5 | cut -f 2 -d " ")
+	valkey=$($sshcmd openssl rsa -noout -modulus -in $key | openssl md5 | cut -f 2 -d " ")
 
 # se validar, instalar
 if [[ "$valcsr" == "$valkey" ]]; then
@@ -61,26 +60,26 @@ fi
 
 # renomeia o certificado snakeoil
 if [[ $webserver == "apache" ]]; then
-	conffile=`ssh root@$hostsrv "apachectl -S | grep 443 | grep $host | cut -f 5 -d "/" | cut -f 1 -d :"`	
-	ssh root@$hostsrv sed s/ssl-cert-snakeoil/$host/g -i $avhost_path$conffile
-	ssh root@$hostsrv sed s^/etc/ssl/certs/^/etc/ssl/^g -i $avhost_path$conffile
+	conffile=$($sshcmd "apachectl -S | grep 443 | grep $host | cut -f 5 -d "/" | cut -f 1 -d :")
+	$sshcmd sed s/ssl-cert-snakeoil/$host/g -i $avhost_path$conffile
+	$sshcmd sed s^/etc/ssl/certs/^/etc/ssl/^g -i $avhost_path$conffile
 fi
 
 # reload ao servidor web se nao der erro
 
 if [[ $webserver == "apache" ]]; then
-	wstst=`ssh root@$hostsrv "apachectl -t 2>&1 | grep 'Syntax OK'"`
+	wstst=$($sshcmd "apachectl -t 2>&1 | grep 'Syntax OK'")
 	if [[ $wstst == "Syntax OK" ]]; then
-		ssh root@$hostsrv service apache2 reload
+		$sshcmd service apache2 reload
 		echo -e "${GREEN}[OK]${NC}$host" 
 	else 
 		echo -e "${RED}[ERRO]${NC}Erro na validacao da configuracao do servidor web $hostsrv${NC}"
 		exit 0
 	fi
 else 
-	wstst=`ssh root@$hostsrv "nginx -t 2>&1 | grep \"test is successful\""`
+	wstst=$($sshcmd "nginx -t 2>&1 | grep \"test is successful\"")
 	if [[ $wstst != "" ]]; then
-		ssh root@$hostsrv service nginx reload
+		$sshcmd service nginx reload
 		echo -e "${GREEN}[OK]${NC}$host"
 	else
 		echo -e "${RED}[ERRO]${NC}Erro na validacao da configuracao do servidor web $hostsrv${NC}"
@@ -90,7 +89,7 @@ fi
 
 # sync entre servidores www.up.pt
 if [[ $hostsrvdns == "193.137.55.13" ]]; then
-	ssh root@$hostsrv scripts/sync-www.sh
+	$sshcmd scripts/sync-www.sh
 fi
 
 rm $host.pem
