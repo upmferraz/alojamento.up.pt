@@ -90,7 +90,7 @@ fi
 
 # execução de script de sync entre servidores do host principal da Universidade
 if [[ $hostsrvdns == "$wwwsrvdns" ]]; then
-	$sshcmd scripts/sync-www.sh
+	$sshcmd $wwwsyncscript
 fi
 
 rm $host.pem
