@@ -2,13 +2,11 @@
 Instalador automatizado de certificados web (para Linux cliente e servidor)
 
 
-1 - Definir um servidor ao qual é possível aceder por SSH para testar a ligação no ficheiro certificados.sh na variável server 
+- Definir as configurações com base nos ficheiros em .conf.orig, os ficheiros deverão ser copiados com as devidas configurações para $HOME/.private/
 
-2 - Definir a localização dos scripts na variável scriptsdir que deverá ser definida também no ficheiro downloads-instala-certificados-https.sh
+- Definir a localização dos downloads no ficheiro downloads-instala-certificados-https.sh
 
-3 - Definir a localização dos downloads no ficheiro downloads-instala-certificados-https.sh
-
-4 - Definir as credenciais de acesso ao e-mail no ficheiro HOME/.private/mailcredentials (se o PC for partilhado verificar as permissões do ficheiro, a cifra das credenciais ainda está por ser implementada) que deverá conter por linha o seguinte:
+- Definir as credenciais de acesso ao e-mail no ficheiro HOME/.private/mailcredentials (se o PC for partilhado verificar as permissões do ficheiro, a cifra das credenciais ainda está por ser implementada) que deverá conter por linha o seguinte:
 
 hostname
 username
@@ -23,8 +21,5 @@ As configurações do ficheiro instala-certificado-https.sh apenas incluem a loc
 Este script inclui uma rotina de sincronização particular para servidores onde existe a replicação de configurações.
 
 As ligações são sempre feitas com base no hostname definido no ficheiro do certificado descarregado, refazendo o nome substituindo os _ por . com queries ao DNS e ligações por ssh com o user root. Ainda não existe implementação para casos em que a instalação deva ser feita com um utilizador que faça posteriormente sudo.
-
-O script certificados.sh poderá ser adicionado no cron de forma a ser executado automaticamente após validação da execução.
-
 
 
