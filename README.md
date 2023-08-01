@@ -13,7 +13,7 @@ Localização para onde descarregar os ficheiros: downloadsdir="/home/user/downl
 
 Define o endereço do servidor de testes: tstserver="web.exemplo.pt"
 
-Define o hostname do primeiro servidor que responde pelo host principal da instituição: wwwsrvdns="www.ec.pt"
+Define o hostname do primeiro servidor que responde pelo host principal da instituição: wwwsrvdns="www.instituicao.pt"
 
 Define o ip do primeiro servidor que responde pelo hostname principal da instituição: wwwhostsrv="1.1.1.1"
 
