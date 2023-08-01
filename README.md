@@ -7,9 +7,13 @@ Instalador automatizado de certificados web (para Linux cliente e servidor)
 O ficheiro webcertificados.conf deve ser configurado com o seguinte:
 
 Localização dos scripts: scriptsdir="$HOME/scripts/certificados"
+
 Localização para onde descarregar os ficheiros: downloadsdir="/home/user/downloads/"
+
 Define o endereço do servidor de testes: tstserver="web.exemplo.pt"
+
 Define o hostname do primeiro servidor que responde pelo host principal da instituição: wwwsrvdns="www.ec.pt"
+
 Define o ip do primeiro servidor que responde pelo hostname principal da instituição: wwwhostsrv="1.1.1.1"
 
 - Definir as credenciais de acesso ao e-mail no ficheiro HOME/.private/mailcredentials (se o PC for partilhado verificar as permissões do ficheiro, a cifra das credenciais ainda está por ser implementada) que deverá conter por linha o seguinte:
