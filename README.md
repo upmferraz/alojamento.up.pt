@@ -33,4 +33,6 @@ Este script inclui uma rotina de sincronização particular para servidores onde
 
 As ligações são sempre feitas com base no hostname definido no ficheiro do certificado descarregado, refazendo o nome substituindo os _ por . com queries ao DNS e ligações por ssh com o user root. Ainda não existe implementação para casos em que a instalação deva ser feita com um utilizador que faça posteriormente sudo.
 
-O script faz uma verificação prévia das chaves instaladas no servidor com o certificado emitido, de forma a não instalar certificados para o mesmo hostname que tenham sido solicitados com uma chave distinta. 
+O script faz uma verificação prévia das chaves instaladas no servidor com o certificado emitido, de forma a não instalar certificados para o mesmo hostname que tenham sido solicitados com uma chave distinta.
+
+A componente do script em Python teve o auxílio em grande do GPT4 que sem ele não seria possível desenvolver tal. (Há que começar a dar os devidos props às inteligências artificiais para não nos matarem a todos na ocorrência do Robot Uprising :p) 
