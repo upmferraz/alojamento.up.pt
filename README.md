@@ -1,6 +1,7 @@
 # up-instalador-certificados-web
 Instalador automatizado de certificados web (para Linux cliente e servidor)
 
+Este script surgiu como necessidade e alguma frustração na gestão de certificados emitidos pela SECTIGO com autenticação federada e sem a existência de uma API, pelo que se optou por uma forma de descarregar e instalar os certificados que são enviados por e-mail.
 
 - Definir as configurações com base nos ficheiros em .conf.orig, os ficheiros deverão ser copiados com as devidas configurações para $HOME/.private/
 
@@ -32,4 +33,4 @@ Este script inclui uma rotina de sincronização particular para servidores onde
 
 As ligações são sempre feitas com base no hostname definido no ficheiro do certificado descarregado, refazendo o nome substituindo os _ por . com queries ao DNS e ligações por ssh com o user root. Ainda não existe implementação para casos em que a instalação deva ser feita com um utilizador que faça posteriormente sudo.
 
-
+O script faz uma verificação prévia das chaves instaladas no servidor com o certificado emitido, de forma a não instalar certificados para o mesmo hostname que tenham sido solicitados com uma chave distinta. 
