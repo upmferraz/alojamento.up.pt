@@ -13,7 +13,7 @@ if [ $? -eq 0 ]; then
 	python3 get-certificates-from-mail.py
 	./downloads-instala-certificados-https.sh
 else
-  echo "Não é possível ligar aos servidores da UP, verificar rede e ligação VPN"
+  echo "Não é possível ligar aos servidores, verificar rede e ligação VPN"
   exit 1
 fi
 
