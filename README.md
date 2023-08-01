@@ -4,6 +4,20 @@ Instalador automatizado de certificados web (para Linux cliente e servidor)
 
 - Definir as configurações com base nos ficheiros em .conf.orig, os ficheiros deverão ser copiados com as devidas configurações para $HOME/.private/
 
+O ficheiro webcertificados.conf deve ser configurado com o seguinte:
+scriptsdir="$HOME/scripts/certificados" # localização deste conjunto de scripts
+downloadsdir="/home/user/downloads/" # localização de onde pretendem descarregar os ficheiros
+# Define o endereço do servidor de testes
+SHELL=/bin/bash
+tstserver=""
+
+# localização da configuração dos vhosts apache
+avhost_path="/etc/apache2/sites-available/"
+
+# Configuração do host para o servidor que responde pelo host principal da Universidade
+wwwsrvdns=""
+wwwhostsrv=""
+
 - Definir a localização dos downloads no ficheiro downloads-instala-certificados-https.sh
 
 - Definir as credenciais de acesso ao e-mail no ficheiro HOME/.private/mailcredentials (se o PC for partilhado verificar as permissões do ficheiro, a cifra das credenciais ainda está por ser implementada) que deverá conter por linha o seguinte:
