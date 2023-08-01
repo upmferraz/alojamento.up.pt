@@ -4,7 +4,8 @@
 #mferraz@uporto.pt
 
 # config
-avhost_path="/etc/apache2/sites-available/" # localização da configuração dos vhosts apache
+source $HOME/.private/webcertificados.conf
+
 # script
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -28,8 +29,8 @@ if [[ $2 == "" ]]; then
 	hostsrv=$host
 	# verifica no DNS se é um servidor em www.up.pt
 	hostsrvdns=$(host $host | grep "has address" | cut -f 4 -d " " | uniq)
-	if [[ $hostsrvdns == "193.137.55.13" ]]; then
-		hostsrv="www1.up.pt"
+	if [[ $hostsrvdns == "$wwwsrvdns" ]]; then
+		hostsrv="$wwwhostsrv"
 	fi
 else 
 	hostsrv=$2
@@ -87,8 +88,8 @@ else
 	fi
 fi
 
-# sync entre servidores www.up.pt
-if [[ $hostsrvdns == "193.137.55.13" ]]; then
+# execução de script de sync entre servidores do host principal da Universidade
+if [[ $hostsrvdns == "$wwwsrvdns" ]]; then
 	$sshcmd scripts/sync-www.sh
 fi
 

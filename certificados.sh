@@ -1,12 +1,11 @@
 #!/bin/bash
 # Define o endereço do servidor de testes
-server="web.up.pt"
+SHELL=/bin/bash
 
-# Define a localização dos scripts
-scriptsdir="$HOME/scripts/certificados"
+source $HOME/.private/webcertificados.conf
 
 # Tenta conectar ao servidor na porta 22
-nc -z -w5 $server 22 >/dev/null 2>&1
+nc -z -w5 $tstserver 22 >/dev/null 2>&1
 
 # Verifica o status de saída do comando anterior
 if [ $? -eq 0 ]; then

@@ -1,8 +1,7 @@
 #!/bin/bash
 DISPLAY=:0
 
-scriptsdir=/home/mferraz/scripts/certificados/
-downloadsdir=/home/mferraz/downloads/
+source $HOME/.private/webcertificados.conf
 
 cd $downloadsdir
 
@@ -14,9 +13,10 @@ fi
 
 for i in $(ls *_*.pem); do
 	output=$($scriptsdir/instala-certificado-https.sh $i)
-	if [[ $output == *"OK"* ]]; then
-		notify-send "Certificado instalado: $output"
-	else
-		notify-send "Certificado não instalado: $output"
-	fi
+	echo $output
+	#if [[ $output == *"OK"* ]]; then
+	#	notify-send "Certificado instalado: $output"
+	#else
+	#	notify-send "Certificado não instalado: $output"
+	#fi
 done
