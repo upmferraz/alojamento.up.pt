@@ -1,4 +1,4 @@
-# up-instalador-certificados-web
+# instalador-certificados-web
 Instalador automatizado de certificados web (para Linux cliente e servidor)
 
 Este script surgiu como necessidade e alguma frustração na gestão de certificados emitidos pela SECTIGO com autenticação federada e sem a existência de uma API, pelo que se optou por uma forma de descarregar e instalar os certificados que são enviados por e-mail.
