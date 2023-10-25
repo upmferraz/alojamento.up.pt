@@ -1,6 +1,6 @@
 #!/bin/bash
 #Instalador de certificados HTTPS
-#v23.05.18
+#v23.10.25
 #mferraz@uporto.pt
 
 # config
@@ -21,8 +21,16 @@ host=$(echo ${1##*/} | sed s/.pem//g | sed s/_/./g)
 csr="$host.pem"
 key="/etc/ssl/private/$host.key"
 
-#cat $cabundle >> $1
 mv $1 $host.pem
+
+# Remove o certificado caso se encontra na lista de hosts a ignorar.
+if [[ $ignorecerts =~ (^|,)$host(,|$) ]]; then
+  # Se sim, remove o ficheiro com o nome host.pem
+  rm $host.pem
+  # Mostra uma mensagem de confirmação
+  echo "O ficheiro $host.pem foi removido por se encontrar na lista de certificados a ignorar"
+  exit 0
+fi
 
 # se nao for indicado host, usar o host do certificado
 if [[ $2 == "" ]]; then
