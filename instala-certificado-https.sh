@@ -63,7 +63,7 @@ if [[ "$valcsr" == "$valkey" ]]; then
 
 	scp $host.pem root@$hostsrv:/etc/ssl/
 else 
-	echo -e "${RED}[Erro]${NC} A chave e certificado não coincidem. A chave não foi instalada."
+	echo -e "${RED}[Erro]${NC} A chave e certificado não coincidem. O certificado não foi instalado."
 	exit 0
 fi
 
